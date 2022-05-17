@@ -1,8 +1,4 @@
-package AdminImpl;
-
-import mediaDB.AudioVideo;
-import mediaDB.Tag;
-import mediaDB.Uploader;
+package mediaDB;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -10,6 +6,11 @@ import java.util.Collection;
 import java.util.Date;
 
 public class AudioVideoImpl implements AudioVideo {
+    long accessCount;
+    String Title;
+    public AudioVideoImpl(String Title){
+        this.Title = Title;
+    }
     @Override
     public int getSamplingRate() {
         return 0;
@@ -22,14 +23,15 @@ public class AudioVideoImpl implements AudioVideo {
 
     @Override
     public Collection<Tag> getTags() {
-        return null;
-    }
-
+        return null;}
     @Override
     public long getAccessCount() {
-        return 0;
+        return accessCount;
     }
-
+    @Override
+    public long setAccessCount(long accessCount) {
+        return this.accessCount++ ;
+    }
     @Override
     public BigDecimal getBitrate() {
         return null;
