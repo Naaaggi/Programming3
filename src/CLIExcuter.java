@@ -7,7 +7,7 @@ import mediaDB.AudioVideoImpl;
 
 import java.util.LinkedList;
 
-public class App {
+public class CLIExcuter {
 
     private static boolean exitSubMenu;
 
@@ -21,15 +21,15 @@ public class App {
         cli(cmds, console);
     }
     public static void setExitSubMenu(boolean exitSubMenu) {
-        App.exitSubMenu = exitSubMenu;
+        CLIExcuter.exitSubMenu = exitSubMenu;
     }
     private static void cli(LinkedList<ICommand> cmds, IConsole console) {
-        App.setExitSubMenu(false);
+        CLIExcuter.setExitSubMenu(false);
         do {
             printCommandLineMenu(cmds);
             ICommand cmd = selectAnOption(cmds, console);
             cmd.execute();
-        } while (!App.exitSubMenu);
+        } while (!CLIExcuter.exitSubMenu);
     }
 
     private static ICommand selectAnOption(LinkedList<ICommand> cmds, IConsole console) {
