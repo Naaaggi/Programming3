@@ -38,4 +38,27 @@ werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfo
 - [ ] Simulation 3
 - [ ] alle Tests sind deterministisch
 ```
+### Exercise4:
+```css
+Pflichtteil
+- [x] Quellen angegeben
+- [x] zip Archiv
+- [x] IntelliJ-Projekt (kein Gradle, Maven o.ä.)
+- [x] JUnit5 und Mockito als Testframeworks (soweit verwendet)
+- [x] keine weiteren Bibliotheken außer JavaFX
+- [x] keine Umlaute, Sonderzeichen, etc. in Datei- und Pfadnamen
+- [x] kompilierbar
+- [x] Trennung zwischen Test- und Produktiv-Code
+- [x] main-Methoden nur im default package
+- [x] ausführbar
+- [x] CRUD für Mediadateien in der GUI
+- [x] Geschäfts- und Darstellungslogik getrennt
+##empfohlene Realisierungen als Vorbereitung auf den Beleg
+werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
+- [x] Auflistungen sind immer sichtbar und werden automatisch aktualisiert
+- [ ] sortierbare Darstellung der Mediadateien mit Abrufadresse, Anzahl der Abrufe, Produzent und Upload-Datum
+- [ ] skalierbare Darstellung
+- [x] FXML & data binding verwendet
+- [ ] Änderung der Abrufadresse mittels drag&drop
+```
 
