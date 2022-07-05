@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class CLIExcuter {
 
-    private static boolean exitSubMenu;
+    public static boolean exitSubMenu;
 
     public static void main(String[] args) {
         System.out.println("Programming 3 2nd Exercise           <Mohamed Neji> <Ghazouani> <579181>\n");

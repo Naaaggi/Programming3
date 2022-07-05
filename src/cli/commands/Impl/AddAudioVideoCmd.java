@@ -8,9 +8,9 @@ import mediaDB.AudioVideo;
 import java.util.ArrayList;
 
 public class AddAudioVideoCmd<T> implements ICommand {
-     Admin admin = new Admin();;
     final private IConsole console;
-    private final ArrayList<T> audioVideoList;
+    private ArrayList<T> audioVideoList = new ArrayList<>();
+    Admin admin = new Admin(audioVideoList);;
 
     public AddAudioVideoCmd(IConsole console, ArrayList<T> audioVideoList) {
         this.console = console;

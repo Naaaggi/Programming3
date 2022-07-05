@@ -10,7 +10,7 @@ import java.util.Random;
 public class ThreadRemover<T> extends Thread {
     String name;
     ArrayList<T> MediaFileList;
-    Admin admin = new Admin();
+    Admin admin = new Admin(MediaFileList);
     AudioVideo item = new AudioVideoImpl("ThreadRemove");
     Random random = new Random();
     public ThreadRemover(String s, ArrayList<T> MediaFileList) {

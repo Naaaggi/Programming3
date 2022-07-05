@@ -1,11 +1,23 @@
 package gui.controller;
 
+import gui.GUI;
+import io.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Controller {
     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -49,5 +61,37 @@ public class Controller {
         System.out.println("Media with the index "  + randomID +" removed.");
 
     }}
+
+    @FXML
+    void saveData(MouseEvent event) {
+        SaveData data = new SaveData();
+        ArrayList<String> writeList = new ArrayList<String>();
+
+// Loop through the observable list and load the string array
+        for (int i =0; i<MediaFileList.getItems().size(); i++){
+            writeList.add(MediaFileList.getItems().get(i));
+        }
+        data.name = writeList;
+        try {
+            ResourceManager.save(data, "1.save");
+        }
+        catch (Exception e) {
+            System.out.println("Couldn't save: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void loadData(MouseEvent event) {
+        try {
+            SaveData data = (SaveData) ResourceManager.load("1.save");
+            ObservableList<String> readList = FXCollections.observableArrayList(data.name);
+
+            MediaFileList.setItems(readList);
+
+        }
+        catch (Exception e) {
+            System.out.println("Couldn't load save data: " + e.getMessage());
+        }
+    }
 
 }

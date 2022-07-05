@@ -8,9 +8,10 @@ import mediaDB.Video;
 import java.util.ArrayList;
 
 public class AddVideoCmd<T> implements ICommand {
-    Admin admin = new Admin();;
     final private IConsole console;
-    private final ArrayList<T> videoList;
+    private ArrayList<T> videoList = new ArrayList<>();
+    Admin admin = new Admin(videoList);;
+
 
 
     public AddVideoCmd(IConsole console, ArrayList<T> videoList) {

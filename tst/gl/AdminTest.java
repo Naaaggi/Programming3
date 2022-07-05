@@ -22,10 +22,11 @@ public class AdminTest {
     //Setting up the variables to use in the tests
     @BeforeEach
     void setUp() {
-        admin = new Admin();
         item = new AudioVideoImpl("AdminTest");
         uploader = new UploaderImpl();
         MediaFileList = new ArrayList<>();
+        admin = new Admin(MediaFileList);
+
     }
 //    @Test void createTest(){
 //        admin.createMedia(item);

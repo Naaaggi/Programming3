@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class Admin<T>{
     private ArrayList<T> MediaFileList = new ArrayList<>();
     private ArrayList<T> UploaderList = new ArrayList<>();
+    public Admin(ArrayList<T> MediaFileList) {
+        this.MediaFileList = MediaFileList;
+    }
     //CRUD OPERATIONS
     public abstract class Property<T> {
         T value;
