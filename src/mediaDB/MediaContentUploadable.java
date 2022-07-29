@@ -5,7 +5,7 @@ import java.util.Date;
 
 public interface MediaContentUploadable extends MediaContent, Uploadable {
     void setAddress(String address);
-    long setAccessCount(long accessCount);
+    void setAccessCount(int accessCount);
     void setUploadDate(Date date);
 
 }

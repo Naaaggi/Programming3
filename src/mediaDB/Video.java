@@ -1,5 +1,5 @@
 package mediaDB;
 
-public interface Video extends MediaContent,Uploadable{
-    int getResolution();
+public interface Video extends MediaContentUploadable{
+    String getResolution();
 }

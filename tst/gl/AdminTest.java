@@ -23,17 +23,17 @@ public class AdminTest {
     @BeforeEach
     void setUp() {
         item = new AudioVideoImpl("AdminTest");
-        uploader = new UploaderImpl();
+        uploader = new UploaderImpl("Producer1");
         MediaFileList = new ArrayList<>();
         admin = new Admin(MediaFileList);
 
     }
-//    @Test void createTest(){
-//        admin.createMedia(item);
-//        System.out.println(MediaFileList);
-//        ArrayList<AudioVideo> result = admin.readMedia(MediaFileList);
-//        assertEquals(1, result.size());
-//    }
+    @Test void createTest(){
+        admin.createMedia(item);
+        System.out.println(MediaFileList);
+        ArrayList<AudioVideo> result = admin.readMedia(MediaFileList);
+        assertEquals(1, result.size());
+    }
     @Test void deleteTest(){
         admin.createMedia(item);
         admin.deleteMedia(item);
@@ -42,8 +42,7 @@ public class AdminTest {
     }
     @Test void updateTest(){
         admin.createMedia(item);
-        long accessCount = 0;
-        admin.updateMedia(item, accessCount);
+        admin.updateMedia(item, item.getAccessCount());
         assertEquals(1, item.getAccessCount());
     }
     @Test void createUploaderTest(){

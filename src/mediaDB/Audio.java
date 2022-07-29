@@ -1,5 +1,5 @@
 package mediaDB;
 
-public interface Audio extends MediaContent,Uploadable{
+public interface Audio extends MediaContentUploadable{
     int getSamplingRate();
 }

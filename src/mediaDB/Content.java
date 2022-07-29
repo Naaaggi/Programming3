@@ -3,8 +3,8 @@ package mediaDB;
 import java.util.Collection;
 
 public interface Content {
-    long setAccessCount(long accessCount);
+    void setAccessCount(int accessCount);
     String getAddress();
     Collection<Tag> getTags();
-    long getAccessCount();
+    int getAccessCount();
 }

@@ -39,7 +39,8 @@ public class Admin<T>{
     public void deleteMedia(T item){
         MediaFileList.remove(item);
     }
-    public void updateMedia(AudioVideo item, long accessCount){
+    public void updateMedia(AudioVideo item, int accessCount){
+        accessCount += 1;
        item.setAccessCount(accessCount);
     }
 }
