@@ -2,6 +2,7 @@ package mediaDB;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 public class VideoImpl implements Video{
 
@@ -15,22 +16,31 @@ public class VideoImpl implements Video{
     private Uploader uploader;
     private String title;
     private Date uploadDate;
+    private String mediaType;
 
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 
     public VideoImpl(String title) {
         this.title = title;
     }
-    public VideoImpl(int accessCount, int bitrate, int length, int size,
-                     String address, String resolution, Collection<Tag> tags,
+    public VideoImpl(int bitrate, int length,
+                     String resolution, Collection<Tag> tags,
                      Uploader uploader) {
-        this.accessCount = accessCount;
         this.bitrate = bitrate;
         this.length = length;
-        this.size = size;
-        this.address = address;
+        this.size = (bitrate*length/8)/1024;
+        this.address = UUID.randomUUID().toString();
         this.resolution = resolution;
         this.tags = tags;
         this.uploader = uploader;
+        this.uploadDate = new Date();
+        this.mediaType = "Video";
     }
 
 

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class AudioVideoImpl extends AudioImpl implements AudioVideo {
     private String resolution;
-
+    private String mediaType;
 
     public AudioVideoImpl(String title) {
         super(title);
@@ -13,9 +13,17 @@ public class AudioVideoImpl extends AudioImpl implements AudioVideo {
     public AudioVideoImpl(int bitrate, int length, int samplingRate, Collection<Tag> tags, Uploader uploader, String resolution) {
         super(bitrate, length, samplingRate, tags, uploader);
         this.resolution = resolution;
+        this.mediaType = "AudioVideo";
     }
 
 
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 
     @Override
     public String getResolution() {

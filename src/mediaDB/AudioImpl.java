@@ -2,6 +2,7 @@ package mediaDB;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 public class AudioImpl implements Audio {
     private int accessCount;
@@ -12,11 +13,18 @@ public class AudioImpl implements Audio {
     private int samplingRate;
     private Collection<Tag> tags;
     private Uploader uploader;
+    private String mediaType;
     private String title;
     private Date uploadDate;
 
 
+    public String getMediaType() {
+        return mediaType;
+    }
 
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 
     public AudioImpl(String title) {
         this.title = title;
@@ -27,11 +35,14 @@ public class AudioImpl implements Audio {
                      Uploader uploader) {
         this.bitrate = bitrate;
         this.length = length;
-        this.size = bitrate*length/8;
+        //show size in MB calculated from bitrate and length
+        this.size = (bitrate*length/8)/1024;
         this.samplingRate = samplingRate;
         this.tags = tags;
         this.uploader = uploader;
         this.uploadDate = new Date();
+        this.mediaType = "Audio";
+        this.address = UUID.randomUUID().toString();
     }
 
 

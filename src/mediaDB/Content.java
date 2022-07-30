@@ -8,4 +8,5 @@ public interface Content {
     void setAddress(String address);
     Collection<Tag> getTags();
     int getAccessCount();
+
 }

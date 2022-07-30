@@ -1,11 +1,8 @@
 package gl;
 
-import mediaDB.AudioVideo;
-import mediaDB.AudioVideoImpl;
-import mediaDB.MediaContent;
-import mediaDB.Uploader;
-
-import java.util.UUID;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
+import mediaDB.*;
 
 import java.util.ArrayList;
 
@@ -20,6 +17,12 @@ public class Admin<T>{
         this.MediaFileList = MediaFileList;
         this.UploaderList = UploaderList;
     }
+
+    public Admin(TableView<MediaContentUploadable> mediaFileList, ListView<String> uploaderList) {
+        this.MediaFileList = MediaFileList;
+        this.UploaderList = UploaderList;
+    }
+
     //CRUD OPERATIONS
     public abstract class Property<T> {
         T value;
@@ -33,7 +36,6 @@ public class Admin<T>{
     }
 
     public void createMedia(MediaContent item){
-        item.setAddress(getAddress());
         MediaFileList.add(item);
     }
 
@@ -49,11 +51,8 @@ public class Admin<T>{
     public void deleteMedia(T item){
         MediaFileList.remove(item);
     }
-    public void updateMedia(AudioVideo item, int accessCount){
+    public void updateMedia(MediaContentUploadable item, int accessCount){
         accessCount += 1;
        item.setAccessCount(accessCount);
-    }
-    private String getAddress() {
-        return UUID.randomUUID().toString();
     }
 }

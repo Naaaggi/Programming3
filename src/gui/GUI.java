@@ -11,7 +11,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("page.fxml"));
-        primaryStage.setTitle("BRABI EKHDEM");
+        primaryStage.setTitle("Media Management System");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
