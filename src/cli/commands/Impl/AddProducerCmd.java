@@ -3,6 +3,8 @@ package cli.commands.Impl;
 import cli.commands.ICommand;
 import cli.console.IConsole;
 import gl.Admin;
+import mediaDB.Uploader;
+import mediaDB.UploaderImpl;
 
 import java.util.ArrayList;
 
@@ -19,8 +21,9 @@ public class AddProducerCmd<T> implements ICommand {
 
     @Override
     public void execute() {
-        String uploader = console.readString("Please enter producer: ");
-        admin.createUploader((T) uploader);
+        String uploaderRead = console.readString("Please enter producer: ");
+        Uploader uploader = new UploaderImpl(uploaderRead);
+        admin.createUploader(uploader);
         System.out.println("The Uploader " + uploader + " got added to the list.");
 
     }

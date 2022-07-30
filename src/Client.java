@@ -4,6 +4,7 @@ import TCP.console.Console;
 import TCP.console.IConsole;
 import gl.Admin;
 import mediaDB.AudioVideo;
+import mediaDB.AudioVideoImpl;
 
 import java.io.*;
 import java.net.Socket;
@@ -51,10 +52,11 @@ public class Client {
                 }
                 switch(commandNumber) {
                     case "1":
-                        String audioVideo = console.readString("Please enter audioVideo File: ");
-                        bw.write(audioVideo);
+                        String audioVideoRead = console.readString("Please enter audioVideo File: ");
+                        bw.write(audioVideoRead);
                         bw.newLine();
                         bw.flush();
+                        AudioVideo audioVideo = new AudioVideoImpl(audioVideoRead);
                         admin.createMedia(audioVideo);
                         System.out.println("The File " + audioVideo + " got added to the list.");
                         break;

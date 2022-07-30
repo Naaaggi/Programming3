@@ -4,14 +4,15 @@ import java.util.Collection;
 import java.util.Date;
 
 public class AudioVideoImpl extends AudioImpl implements AudioVideo {
-    String resolution;
+    private String resolution;
 
 
     public AudioVideoImpl(String title) {
         super(title);
     }
-    public AudioVideoImpl(int bitrate, int length, int samplingRate, Collection<Tag> tags, Uploader uploader, Date uploadDate) {
-        super(bitrate, length, samplingRate, tags, uploader, uploadDate);
+    public AudioVideoImpl(int bitrate, int length, int samplingRate, Collection<Tag> tags, Uploader uploader, String resolution) {
+        super(bitrate, length, samplingRate, tags, uploader);
+        this.resolution = resolution;
     }
 
 
@@ -24,5 +25,14 @@ public class AudioVideoImpl extends AudioImpl implements AudioVideo {
     @Override
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+
+    @Override
+    public String toString() {
+        return "AudioVideo " +
+                getUploader() + " " + getTags() + " "+
+                getBitrate() + " " + getLength() + " " + resolution
+                + " " + getAddress() + " " + getUploadDate();
     }
 }

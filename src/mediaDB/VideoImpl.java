@@ -13,11 +13,16 @@ public class VideoImpl implements Video{
     private String resolution;
     private Collection<Tag> tags;
     private Uploader uploader;
+    private String title;
     private Date uploadDate;
 
+
+    public VideoImpl(String title) {
+        this.title = title;
+    }
     public VideoImpl(int accessCount, int bitrate, int length, int size,
                      String address, String resolution, Collection<Tag> tags,
-                     Uploader uploader, Date uploadDate) {
+                     Uploader uploader) {
         this.accessCount = accessCount;
         this.bitrate = bitrate;
         this.length = length;
@@ -26,7 +31,6 @@ public class VideoImpl implements Video{
         this.resolution = resolution;
         this.tags = tags;
         this.uploader = uploader;
-        this.uploadDate = uploadDate;
     }
 
 
@@ -62,34 +66,39 @@ public class VideoImpl implements Video{
 
     @Override
     public void setAddress(String address) {
-
-
+        this.address = address;
     }
 
     @Override
     public void setAccessCount(int accessCount) {
-        this.accessCount = accessCount++;
+        this.accessCount = accessCount;
     }
-
-
 
     @Override
     public void setUploadDate(Date date) {
-
+        this.uploadDate = date;
     }
 
     @Override
     public Uploader getUploader() {
-        return null;
+            return uploader;
     }
 
     @Override
     public Date getUploadDate() {
-        return null;
+        return uploadDate;
     }
 
     @Override
     public String getResolution() {
-        return null;
+        return resolution;
+    }
+
+    @Override
+    public String toString() {
+        return "Video " +
+                uploader + " " + tags + " "+
+                bitrate + " " + length + " " + resolution
+                + " " + address + " " + uploadDate;
     }
 }

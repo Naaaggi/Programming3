@@ -2,14 +2,23 @@ package gl;
 
 import mediaDB.AudioVideo;
 import mediaDB.AudioVideoImpl;
+import mediaDB.MediaContent;
+import mediaDB.Uploader;
+
+import java.util.UUID;
 
 import java.util.ArrayList;
 
 public class Admin<T>{
-    private ArrayList<T> MediaFileList = new ArrayList<>();
-    private ArrayList<T> UploaderList = new ArrayList<>();
-    public Admin(ArrayList<T> MediaFileList) {
+    private ArrayList<MediaContent> MediaFileList = new ArrayList<>();
+    private ArrayList<Uploader> UploaderList = new ArrayList<>();
+
+    public Admin(ArrayList<MediaContent> MediaFileList) {
         this.MediaFileList = MediaFileList;
+    }
+    public Admin(ArrayList<MediaContent> MediaFileList, ArrayList<Uploader> UploaderList) {
+        this.MediaFileList = MediaFileList;
+        this.UploaderList = UploaderList;
     }
     //CRUD OPERATIONS
     public abstract class Property<T> {
@@ -23,14 +32,15 @@ public class Admin<T>{
         }
     }
 
-    public void createMedia(T item){
+    public void createMedia(MediaContent item){
+        item.setAddress(getAddress());
         MediaFileList.add(item);
     }
 
-    public void createUploader(T name){
+    public void createUploader(Uploader name){
         this.UploaderList.add(name);
     }
-    public ArrayList<T> readUploader(){
+    public ArrayList<Uploader> readUploader(){
         return UploaderList;
     }
     public ArrayList<T> readMedia(ArrayList<T> MediaFileList){
@@ -42,5 +52,8 @@ public class Admin<T>{
     public void updateMedia(AudioVideo item, int accessCount){
         accessCount += 1;
        item.setAccessCount(accessCount);
+    }
+    private String getAddress() {
+        return UUID.randomUUID().toString();
     }
 }

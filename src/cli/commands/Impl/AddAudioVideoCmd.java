@@ -4,6 +4,7 @@ import cli.commands.ICommand;
 import cli.console.IConsole;
 import gl.Admin;
 import mediaDB.AudioVideo;
+import mediaDB.AudioVideoImpl;
 
 import java.util.ArrayList;
 
@@ -19,8 +20,9 @@ public class AddAudioVideoCmd<T> implements ICommand {
 
     @Override
     public void execute() {
-        String audioVideo = console.readString("Please enter audioVideo File: ");
-        admin.createMedia((T) audioVideo);
+        String audioVideoRead = console.readString("Please enter audioVideo File: ");
+        AudioVideo audioVideo = new AudioVideoImpl(audioVideoRead);
+        admin.createMedia(audioVideo);
         System.out.println("The File " + audioVideo + " got added to the list.");
         ArrayList<AudioVideo> result= admin.readMedia(audioVideoList);
         System.out.println("The list contains currently the following files:\n" + result);

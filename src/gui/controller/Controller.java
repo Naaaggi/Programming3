@@ -23,7 +23,8 @@ public class Controller {
     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
     @FXML
     private ListView<String> MediaFileList;
-
+    @FXML
+    private ListView<String> UploaderList;
     @FXML
     private TextField MediaFileName;
     @FXML
@@ -32,6 +33,7 @@ public class Controller {
     @FXML
     void createMedia(MouseEvent event) {
         MediaFileList.getItems().add(MediaFileName.getText());
+        UploaderList.getItems().add(Producer.getText());
         System.out.println("Media added: " + MediaFileName.getText() + " by " + Producer.getText());
     }
 

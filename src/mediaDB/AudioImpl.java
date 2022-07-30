@@ -3,7 +3,7 @@ package mediaDB;
 import java.util.Collection;
 import java.util.Date;
 
-public abstract class AudioImpl implements Audio {
+public class AudioImpl implements Audio {
     private int accessCount;
     private int bitrate;
     private int length;
@@ -12,8 +12,11 @@ public abstract class AudioImpl implements Audio {
     private int samplingRate;
     private Collection<Tag> tags;
     private Uploader uploader;
-    private Date uploadDate;
     private String title;
+    private Date uploadDate;
+
+
+
 
     public AudioImpl(String title) {
         this.title = title;
@@ -21,14 +24,14 @@ public abstract class AudioImpl implements Audio {
     }
     public AudioImpl(int bitrate, int length,
                      int samplingRate, Collection<Tag> tags,
-                     Uploader uploader, Date uploadDate) {
+                     Uploader uploader) {
         this.bitrate = bitrate;
         this.length = length;
         this.size = bitrate*length/8;
         this.samplingRate = samplingRate;
         this.tags = tags;
         this.uploader = uploader;
-        this.uploadDate = uploadDate;
+        this.uploadDate = new Date();
     }
 
 
@@ -37,11 +40,6 @@ public abstract class AudioImpl implements Audio {
     @Override
     public int getSamplingRate() {
         return samplingRate;
-    }
-
-    @Override
-    public String getAddress() {
-        return address;
     }
 
     @Override
@@ -71,7 +69,7 @@ public abstract class AudioImpl implements Audio {
 
     @Override
     public void setAddress(String address) {
-
+        this.address = address;
     }
 
     @Override
@@ -81,18 +79,29 @@ public abstract class AudioImpl implements Audio {
 
     @Override
     public void setUploadDate(Date date) {
+        this.uploadDate = date;
+    }
 
+    @Override
+    public String getAddress() {
+        return address;
     }
 
     @Override
     public Uploader getUploader() {
-        return null;
+        return uploader;
     }
 
     @Override
     public Date getUploadDate() {
-        return null;
+        return uploadDate;
     }
 
-    public abstract void setResolution(String resolution);
+    @Override
+    public String toString() {
+        return "Audio " +
+                uploader + " " + tags + " "+
+                bitrate + " " + length + " " + samplingRate
+                + " " + address + " " + uploadDate;
+    }
 }
