@@ -68,7 +68,7 @@ public class Controller implements Initializable {
                 admin.createUploader(uploader);
             }
             System.out.println("Media added: " + MediaFileName.getText() + " by " + parsed[1]);
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException | IndexOutOfBoundsException  e) {
             errorAlert.setWidth(500);
             errorAlert.setHeight(300);
             errorAlert.setTitle("Error");
@@ -80,13 +80,22 @@ public class Controller implements Initializable {
 
     }
     @FXML void updateMedia(MouseEvent event) {
-        int selectedID = MediaFileList.getSelectionModel().getSelectedIndex();
-        MediaContentUploadable item = MediaFileList.getItems().get(selectedID);
-        item.setAccessCount(item.getAccessCount());
-        admin.updateMedia(item, item.getAccessCount());
-        System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress()
-                + " was accessed " + item.getAccessCount() + " times");
-        MediaFileList.refresh();
+        try {
+            int selectedID = MediaFileList.getSelectionModel().getSelectedIndex();
+            MediaContentUploadable item = MediaFileList.getItems().get(selectedID);
+            item.setAccessCount(item.getAccessCount());
+            admin.updateMedia(item, item.getAccessCount());
+            System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress()
+                    + " was accessed " + item.getAccessCount() + " times");
+            MediaFileList.refresh();
+        } catch (IndexOutOfBoundsException e) {
+            errorAlert.setWidth(500);
+            errorAlert.setHeight(300);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Error");
+            errorAlert.setContentText("Please select a media file to update");
+            errorAlert.showAndWait();
+        }
 
     }
     @FXML
@@ -96,10 +105,21 @@ public class Controller implements Initializable {
             errorAlert.setContentText("Can't use this button.\nReason: Media List is empty.");
             errorAlert.showAndWait();
         } else {
-            int selectedID = MediaFileList.getSelectionModel().getSelectedIndex();
-            MediaFileList.getItems().remove(selectedID);
-            admin.deleteMedia(MediaFileList.getItems().get(selectedID));
-            System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress() + " removed.");
+            try {
+                int selectedID = MediaFileList.getSelectionModel().getSelectedIndex();
+                MediaContentUploadable item = MediaFileList.getItems().get(selectedID);
+                admin.deleteMedia(item);
+                MediaFileList.getItems().remove(selectedID);
+                System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress() + " was deleted");
+            } catch (IndexOutOfBoundsException e) {
+                errorAlert.setWidth(500);
+                errorAlert.setHeight(300);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Error");
+                errorAlert.setContentText("Please select a media file to delete");
+                errorAlert.showAndWait();
+            }
+
         }
     }
     @FXML
@@ -111,10 +131,21 @@ public class Controller implements Initializable {
             errorAlert.showAndWait();
         }
         else{
-        int randomID = rand.nextInt(MediaFileList.getItems().size());
-        MediaFileList.getItems().remove(randomID);
-            admin.deleteMedia(MediaFileList.getItems().get(randomID));
-            System.out.println("Media with the address " + MediaFileList.getItems().get(randomID).getAddress() + " removed.");
+            try {
+                int randomID = rand.nextInt(MediaFileList.getItems().size());
+                MediaContentUploadable item = MediaFileList.getItems().get(randomID);
+                admin.deleteMedia(item);
+                MediaFileList.getItems().remove(randomID);
+                System.out.println("Media with the address " + MediaFileList.getItems().get(randomID).getAddress() + " was deleted");
+            } catch (IndexOutOfBoundsException e) {
+                errorAlert.setWidth(500);
+                errorAlert.setHeight(300);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Error");
+                errorAlert.setContentText("Can't use this button.\nReason: Media List is empty.");
+                errorAlert.showAndWait();
+            }
+
 
     }}
 

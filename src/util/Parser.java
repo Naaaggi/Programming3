@@ -54,7 +54,6 @@ public class Parser {
             }
 
 
-
             case "InteractiveVideo": {
                 String resolution = parsed[5];
                 String type = parsed[6];

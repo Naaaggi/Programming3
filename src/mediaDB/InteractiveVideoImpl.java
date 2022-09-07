@@ -31,6 +31,8 @@ public class InteractiveVideoImpl extends VideoImpl implements InteractiveVideo 
 
     public InteractiveVideoImpl(int bitrate, int length, String resolution, Collection<Tag> tags, Uploader uploader, String type) {
         super(bitrate, length, resolution, tags, uploader);
+        this.mediaType = "InteractiveVideo";
+
     }
 
 }
