@@ -137,13 +137,7 @@ public class Controller implements Initializable {
                 admin.deleteMedia(item);
                 MediaFileList.getItems().remove(randomID);
                 System.out.println("Media with the address " + MediaFileList.getItems().get(randomID).getAddress() + " was deleted");
-            } catch (IndexOutOfBoundsException e) {
-                errorAlert.setWidth(500);
-                errorAlert.setHeight(300);
-                errorAlert.setTitle("Error");
-                errorAlert.setHeaderText("Error");
-                errorAlert.setContentText("Can't use this button.\nReason: Media List is empty.");
-                errorAlert.showAndWait();
+            } catch ( StackOverflowError e) {
             }
 
 
