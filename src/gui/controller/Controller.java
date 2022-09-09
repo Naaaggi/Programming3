@@ -111,13 +111,8 @@ public class Controller implements Initializable {
                 admin.deleteMedia(item);
                 MediaFileList.getItems().remove(selectedID);
                 System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress() + " was deleted");
-            } catch (IndexOutOfBoundsException e) {
-                errorAlert.setWidth(500);
-                errorAlert.setHeight(300);
-                errorAlert.setTitle("Error");
-                errorAlert.setHeaderText("Error");
-                errorAlert.setContentText("Please select a media file to delete");
-                errorAlert.showAndWait();
+            } catch (StackOverflowError e) {
+
             }
 
         }
@@ -127,6 +122,10 @@ public class Controller implements Initializable {
         Random rand = new Random();
         if(MediaFileList.getItems().size() ==0){
             System.out.println("Media List is empty.");
+            errorAlert.setWidth(500);
+            errorAlert.setHeight(300);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Error");
             errorAlert.setContentText("Can't use this button.\nReason: Media List is empty.");
             errorAlert.showAndWait();
         }
@@ -134,10 +133,16 @@ public class Controller implements Initializable {
             try {
                 int randomID = rand.nextInt(MediaFileList.getItems().size());
                 MediaContentUploadable item = MediaFileList.getItems().get(randomID);
-                admin.deleteMedia(item);
                 MediaFileList.getItems().remove(randomID);
+                admin.deleteMedia(item);
                 System.out.println("Media with the address " + MediaFileList.getItems().get(randomID).getAddress() + " was deleted");
-            } catch ( StackOverflowError e) {
+            } catch ( IndexOutOfBoundsException e) {
+                errorAlert.setWidth(500);
+                errorAlert.setHeight(300);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Error");
+                errorAlert.setContentText("Please select a media file to delete");
+                errorAlert.showAndWait();
             }
 
 

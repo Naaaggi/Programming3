@@ -19,16 +19,14 @@ public class Admin<T>{
     }
 
     public Admin(TableView<MediaContentUploadable> mediaFileList, ListView<String> uploaderList) {
-        this.MediaFileList = MediaFileList;
-        this.UploaderList = UploaderList;
     }
 
     //CRUD OPERATIONS
-    public abstract class Property<T> {
+    public abstract static class Property<T> {
         T value;
         public abstract void setValue(String input);
     }
-    public class StringProperty extends Property<String> {
+    public static class StringProperty extends Property<String> {
         @Override
         public void setValue(String input) {
             this.value = input;
