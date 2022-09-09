@@ -9,13 +9,8 @@ import mediaDB.*;
 
 public class SaveData implements Serializable {
     private static final long serialVersionUID = 1L;
-    public ArrayList<String> name;
-    public String address;
-    public String mediaType;
-    public Uploader uploader;
-    public int size;
-    public int accessCount;
-    public Date uploadDate;
+    public ArrayList<String> list;
+    public ArrayList<String> mediaList;
 
 }
 

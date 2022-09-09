@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class Controller implements Initializable {
     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+    ArrayList<String> textList = new ArrayList<String>();
 
     @FXML private TableView<MediaContentUploadable> MediaFileList;
     @FXML private ListView<String> UploaderList;
@@ -30,7 +31,7 @@ public class Controller implements Initializable {
     @FXML private TableColumn<MediaContentUploadable, Integer> sizeColumn;
     @FXML private TableColumn<MediaContentUploadable, Date> dateColumn;
     @FXML private TableColumn<MediaContentUploadable, Long> accessCountColumn;
-    Admin admin = new Admin(MediaFileList,UploaderList);
+    Admin<MediaContentUploadable> admin = new Admin<MediaContentUploadable>(MediaFileList,UploaderList);
 
 
 
@@ -51,13 +52,14 @@ public class Controller implements Initializable {
     void createMedia(MouseEvent event) {
         try {
             String text = MediaFileName.getText();
+            textList.add(text);
             String[] parsed = text.split(" ");
             String producer = parsed[1];
             UploaderImpl uploader = new UploaderImpl(producer);
             MediaContentUploadable item = Parser.parse(text);
-            System.out.println(item);
             ObservableList<MediaContentUploadable> items = MediaFileList.getItems();
             items.add(item);
+            System.out.println(items);
             MediaFileList.setItems(items);
             admin.createMedia(item);
 
@@ -107,12 +109,17 @@ public class Controller implements Initializable {
         } else {
             try {
                 int selectedID = MediaFileList.getSelectionModel().getSelectedIndex();
-                MediaContentUploadable item = MediaFileList.getItems().get(selectedID);
-                admin.deleteMedia(item);
-                MediaFileList.getItems().remove(selectedID);
-                System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress() + " was deleted");
-            } catch (StackOverflowError e) {
-
+                if (selectedID == -1) {
+                    errorAlert.setContentText("Please select a media file to delete");
+                    errorAlert.showAndWait();
+                } else {
+                    MediaContentUploadable item = MediaFileList.getItems().get(selectedID);
+                    admin.deleteMedia(item);
+                    System.out.println("Media with the address " + MediaFileList.getItems().get(selectedID).getAddress()
+                            + " was deleted");
+                    MediaFileList.getItems().remove(selectedID);
+                }
+            } catch (IndexOutOfBoundsException ignored) {
             }
 
         }
@@ -133,16 +140,10 @@ public class Controller implements Initializable {
             try {
                 int randomID = rand.nextInt(MediaFileList.getItems().size());
                 MediaContentUploadable item = MediaFileList.getItems().get(randomID);
-                MediaFileList.getItems().remove(randomID);
                 admin.deleteMedia(item);
+                MediaFileList.getItems().remove(randomID);
                 System.out.println("Media with the address " + MediaFileList.getItems().get(randomID).getAddress() + " was deleted");
-            } catch ( IndexOutOfBoundsException e) {
-                errorAlert.setWidth(500);
-                errorAlert.setHeight(300);
-                errorAlert.setTitle("Error");
-                errorAlert.setHeaderText("Error");
-                errorAlert.setContentText("Please select a media file to delete");
-                errorAlert.showAndWait();
+            } catch ( IndexOutOfBoundsException ignored) {
             }
 
 
@@ -154,25 +155,9 @@ public class Controller implements Initializable {
     void saveData(MouseEvent event) {
         SaveData data = new SaveData();
         SaveData data1 = new SaveData();
-        ArrayList<MediaContentUploadable> writeMediaList = new ArrayList<MediaContentUploadable>();
-        ArrayList<String> writeUploaderList = new ArrayList<String>();
 
-        for (int i = 0; i < MediaFileList.getItems().size(); i++) {
-            MediaContentUploadable item = MediaFileList.getItems().get(i);
-            writeMediaList.add(item);
-            data.address=item.getAddress();
-            data.accessCount=item.getAccessCount();
-            data.mediaType=item.getMediaType();
-            data.size=item.getSize();
-            data.uploadDate=item.getUploadDate();
-            System.out.println(item);
-        }
-
-        for (int i =0; i<UploaderList.getItems().size(); i++){
-            writeUploaderList.add(UploaderList.getItems().get(i));
-        }
-
-        data1.name = writeUploaderList;
+        data.mediaList = textList;
+        data1.list = new ArrayList<String>(UploaderList.getItems());
 
         try {
             ResourceManager.save(data, "MediaFileList.txt");
@@ -188,14 +173,22 @@ public class Controller implements Initializable {
     @FXML
     void loadData(MouseEvent event) {
         try {
-
+            // Load media list
             SaveData data = (SaveData) ResourceManager.load("MediaFileList.txt");
-            System.out.println(data.accessCount);
-            ObservableList<MediaContentUploadable> readMediaList = FXCollections.observableArrayList();
-            MediaFileList.setItems(readMediaList);
+            System.out.println(data.mediaList);
+            MediaFileList.getItems().clear();
+            ObservableList<MediaContentUploadable> items = FXCollections.observableArrayList();
+            for (String text : data.mediaList) {
+                MediaContentUploadable item = Parser.parse(text);
+                items.add(item);
+                MediaFileList.setItems(items);
+                admin.createMedia(item);
+            }
 
+            // Load uploader list
             SaveData data1 = (SaveData) ResourceManager.load("UploadFileList.txt");
-            ObservableList<String> readUploadList = FXCollections.observableArrayList(data1.name);
+            System.out.println(data1.list);
+            ObservableList<String> readUploadList = FXCollections.observableArrayList(data1.list);
             UploaderList.setItems(readUploadList);
 
 
