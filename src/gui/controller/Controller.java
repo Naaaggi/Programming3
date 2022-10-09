@@ -1,7 +1,8 @@
 package gui.controller;
 
 import gl.Admin;
-import io.*;
+import gl.io.ResourceManager;
+import gl.io.SaveData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -17,26 +17,13 @@ public class Admin<T>{
         this.MediaFileList = MediaFileList;
         this.UploaderList = UploaderList;
     }
-
     public Admin(TableView<MediaContentUploadable> mediaFileList, ListView<String> uploaderList) {
     }
 
     //CRUD OPERATIONS
-    public abstract static class Property<T> {
-        T value;
-        public abstract void setValue(String input);
-    }
-    public static class StringProperty extends Property<String> {
-        @Override
-        public void setValue(String input) {
-            this.value = input;
-        }
-    }
-
     public void createMedia(MediaContent item){
         MediaFileList.add(item);
     }
-
     public void createUploader(Uploader name){
         this.UploaderList.add(name);
     }
@@ -50,7 +37,6 @@ public class Admin<T>{
         MediaFileList.remove(item);
     }
     public void updateMedia(MediaContentUploadable item, int accessCount){
-        accessCount += 1;
-       item.setAccessCount(accessCount);
+       item.setAccessCount(accessCount+1);
     }
 }
