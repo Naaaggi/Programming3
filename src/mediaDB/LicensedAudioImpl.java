@@ -33,5 +33,13 @@ public class LicensedAudioImpl extends AudioImpl implements LicensedAudio {
     public void setHolder(String holder) {
         this.holder = holder;
     }
+
+    @Override
+    public String toString() {
+        return "LicensedAudio " +
+                getUploader() + " " + getTags() + " "+
+                getBitrate() + " " + getLength() + " " + getSamplingRate()
+                + " " + getAddress() + " " + getUploadDate();
+    }
 }
 

@@ -32,13 +32,13 @@ public class CRUDTest {
     @Test void createTest(){
         admin.createMedia(item);
         System.out.println(MediaFileList);
-        ArrayList<MediaContentUploadable> result = admin.readMedia(MediaFileList);
+        ArrayList<MediaContentUploadable> result = admin.readMedia();
         assertEquals(1, result.size());
     }
     @Test void deleteTest(){
         admin.createMedia(item);
         admin.deleteMedia(item);
-        ArrayList<MediaContentUploadable> result = admin.readMedia(MediaFileList);
+        ArrayList<MediaContentUploadable> result = admin.readMedia();
         assertEquals(0, result.size());
     }
     @Test void updateTest(){

@@ -82,25 +82,31 @@ public class MediaCLIController implements MediaController{
 
         private void handleCreateEvent(InputEvent event) {
             String[] parsed = event.getText().split(" ");
+            //add uploader
             if(parsed.length == 1){
                 String producer = parsed[0];
-                UploaderImpl uploader = new UploaderImpl(producer);
                 uploaderList = adminCRUD.readUploader();
-                if(uploaderList.contains(uploader)) {
-                    System.out.print("User already exists!\n");
-                    return;
+                Uploader uploader = new UploaderImpl(producer);
+                for(Uploader u : uploaderList){
+                    if(u.getName().equals(uploader.getName())){
+                        mediaView.displayError("Uploader already exists!");
+                        return;
+                    }
                 }
-                else adminCRUD.createUploader(uploader);
-                System.out.println(adminCRUD.readUploader());
+                adminCRUD.createUploader(uploader);
+                mediaView.displayMessage(adminCRUD.readUploader().toString());
                 return;
             }
-
+        //add media
             try {
                 MediaContentUploadable item = Parser.parse(event.getText());
                 adminCRUD.createMedia(item);
                 mediaView.displayMessage("Media got uploaded successfully!");
+                mediaView.displayMessage(adminCRUD.readMedia().toString());
+
             } catch (Exception e) {
-                mediaView.displayError("Invalid input");
+                mediaView.displayError("Please enter a valid media file following the format: " +
+                        "\nMediaType Producer Tags Bitrate Length SamplingRate(If Audio) Resolution(If Video) Type(If InteractiveVideo) Holder(If LicensedMedia)");
             }
         }
     }

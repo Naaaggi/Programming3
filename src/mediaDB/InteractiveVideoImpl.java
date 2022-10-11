@@ -35,4 +35,12 @@ public class InteractiveVideoImpl extends VideoImpl implements InteractiveVideo 
 
     }
 
+    @Override
+    public String toString() {
+        return "InteractiveVideo " +
+                getUploader() + " " + getTags() + " "+
+                getBitrate() + " " + getLength() + " " + getResolution()
+                + " " + getAddress() + " " + getUploadDate();
+    }
+
 }

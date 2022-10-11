@@ -61,7 +61,7 @@ public class Client {
                         System.out.println("The File " + audioVideo + " got added to the list.");
                         break;
                     case "2":
-                        ArrayList<AudioVideo> result= admin.readMedia(audioVideoList);
+                        ArrayList<AudioVideo> result= admin.readMedia();
                         bw.write(String.valueOf(result));
                         bw.newLine();
                         bw.flush();

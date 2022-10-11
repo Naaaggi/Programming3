@@ -24,7 +24,7 @@ public class AddAudioVideoCmd<T> implements ICommand {
         AudioVideo audioVideo = new AudioVideoImpl(audioVideoRead);
         admin.createMedia(audioVideo);
         System.out.println("The File " + audioVideo + " got added to the list.");
-        ArrayList<AudioVideo> result= admin.readMedia(audioVideoList);
+        ArrayList<AudioVideo> result= admin.readMedia();
         System.out.println("The list contains currently the following files:\n" + result);
     }
 

@@ -30,7 +30,7 @@ public class AdminCRUD<T>{
     public ArrayList<Uploader> readUploader(){
         return UploaderList;
     }
-    public ArrayList<T> readMedia(ArrayList<T> MediaFileList){
+    public ArrayList<MediaContent> readMedia(){
         return MediaFileList;
     }
     public void deleteMedia(T item){

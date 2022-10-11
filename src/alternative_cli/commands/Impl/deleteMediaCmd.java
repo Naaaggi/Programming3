@@ -22,7 +22,7 @@ public class deleteMediaCmd<T> implements ICommand {
         String audioVideo = console.readString("Please pick audioVideo File to be deleted: ");
         admin.deleteMedia((T) audioVideo);
         System.out.println("The File " + audioVideo + " got deleted from the list.");
-        ArrayList<T> result= admin.readMedia(audioVideoList);
+        ArrayList<T> result= admin.readMedia();
         System.out.println("The list contains currently the following files:\n" + result);
 
     }

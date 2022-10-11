@@ -21,7 +21,7 @@ public class ThreadRemover<T> extends Thread {
     public void run() {
         synchronized (MediaFileList) {
             System.out.println("Thread remover started " + name);
-            ArrayList<AudioVideo> result = admin.readMedia(MediaFileList);
+            ArrayList<AudioVideo> result = admin.readMedia();
 
                 try {
                 Thread.sleep(2000);

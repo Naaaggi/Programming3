@@ -34,4 +34,12 @@ public class LicensedAudioVideoImpl extends AudioVideoImpl implements LicensedAu
     public void setHolder(String holder) {
         this.holder = holder;
     }
+
+    @Override
+    public String toString() {
+        return "LicensedAudioVideo " +
+                getUploader() + " " + getTags() + " "+
+                getBitrate() + " " + getLength() + " " + getResolution()
+                + " " + getAddress() + " " + getUploadDate();
+    }
 }

@@ -26,7 +26,7 @@ public class AddVideoCmd<T> implements ICommand {
         Video video = new VideoImpl(videoRead);
         admin.createMedia(video);
         System.out.println("The video " + video + " got added to the list.");
-        ArrayList<Video> result= admin.readMedia(videoList);
+        ArrayList<Video> result= admin.readMedia();
         System.out.println("The list contains currently the following files:\n" + result);
 
     }

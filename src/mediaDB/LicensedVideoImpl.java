@@ -37,4 +37,12 @@ public class LicensedVideoImpl extends VideoImpl implements LicensedVideo {
         this.mediaType = mediaType;
     }
 
+    @Override
+    public String toString() {
+        return "LicensedVideo " +
+                getUploader() + " " + getTags() + " "+
+                getBitrate() + " " + getLength() + " " + getResolution()
+                + " " + getAddress() + " " + getUploadDate();
+    }
+
 }
