@@ -36,6 +36,16 @@ public class AdminCRUD<T>{
     public void deleteMedia(MediaContent item){
         MediaFileList.remove(item);
     }
+    public void deleteUploader(Uploader name){
+        UploaderList.remove(name);
+    }
+    public void deleteUploaderUsingName(String name){
+        for (Uploader uploader : UploaderList) {
+            if (uploader.getName().equals(name)) {
+                UploaderList.remove(uploader);
+            }
+        }
+    }
     public void updateMedia(MediaContent item, int accessCount){
        item.setAccessCount(accessCount+1);
     }
