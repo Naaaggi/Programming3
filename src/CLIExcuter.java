@@ -1,54 +1,26 @@
-import cli.commands.CommandFactory;
-import cli.commands.ICommand;
-import cli.console.Console;
-import cli.console.IConsole;
-import mediaDB.AudioVideo;
-import mediaDB.AudioVideoImpl;
+import cli.*;
+import gl.AdminCRUD;
+import mediaDB.MediaContentUploadable;
+import mediaDB.Uploader;
+import observer.MediaStorageObserver;
+import storage.MediaStorage;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class CLIExcuter {
-
-    public static boolean exitSubMenu;
-
     public static void main(String[] args) {
-        System.out.println("Programming 3 2nd Exercise           <Mohamed Neji> <Ghazouani> <579181>\n");
+        Console console = new Console();
+        long diskSize = console.readLongFromStdin("Enter Disk size in gigabyte: ");
+        MediaStorage mediaStorage = new MediaStorage(diskSize * 1000);
+        MediaStorageObserver observer = new MediaStorageObserver(mediaStorage);
+        ArrayList<MediaContentUploadable> MediaFileList = new ArrayList<>();
+        ArrayList<Uploader> UploaderList = new ArrayList<>();
 
-        AudioVideo MediaFileList = new AudioVideoImpl("CLI");
-        IConsole console = new Console();;
-        CommandFactory factory = new CommandFactory(console, MediaFileList);
-        LinkedList<ICommand> cmds = factory.returnsCommands();
-        cli(cmds, console);
-    }
-    public static void setExitSubMenu(boolean exitSubMenu) {
-        CLIExcuter.exitSubMenu = exitSubMenu;
-    }
-    private static void cli(LinkedList<ICommand> cmds, IConsole console) {
-        CLIExcuter.setExitSubMenu(false);
-        do {
-            printCommandLineMenu(cmds);
-            ICommand cmd = selectAnOption(cmds, console);
-            cmd.execute();
-        } while (!CLIExcuter.exitSubMenu);
-    }
+        AdminCRUD<MediaContentUploadable> adminCRUD = new AdminCRUD(MediaFileList, UploaderList);
+        MediaView mediaView = new CLIMediaView(console);
+        MediaController mediaController = new MediaCLIController(mediaView, mediaStorage, adminCRUD);
+        mediaController.start();
 
-    private static ICommand selectAnOption(LinkedList<ICommand> cmds, IConsole console) {
-        do {
-            int selectedOption = console.readInteger("Please enter an option: ");
-            if (isValidOption(selectedOption, 0, cmds.size())) {
-                return cmds.get(selectedOption);
-            }
-        } while (true);
-    }
 
-    private static boolean isValidOption(int index, int min, int max) {
-        return index >= min && index < max;
-    }
-
-    private static void printCommandLineMenu(LinkedList<ICommand> cmds) {
-        System.out.println("\n0. " + cmds.get(0) + "\n");
-        for (int i = 1; i < cmds.size(); i++) {
-            System.out.println(i + ". " + cmds.get(i));
-        }
     }
 }

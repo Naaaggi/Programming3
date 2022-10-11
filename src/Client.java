@@ -2,7 +2,7 @@
 
 import TCP.console.Console;
 import TCP.console.IConsole;
-import gl.Admin;
+import gl.AdminCRUD;
 import mediaDB.AudioVideo;
 import mediaDB.AudioVideoImpl;
 
@@ -46,7 +46,7 @@ public class Client {
                 bw.newLine();
                 bw.flush();
                 System.out.println(br.readLine());
-                Admin admin = new Admin(audioVideoList);
+                AdminCRUD admin = new AdminCRUD(audioVideoList);
                 if(commandNumber.equals("0")){
                     break;
                 }

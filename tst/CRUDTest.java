@@ -1,14 +1,11 @@
-import gl.Admin;
+import gl.AdminCRUD;
 import mediaDB.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import util.Parser;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +14,7 @@ import static org.mockito.Mockito.when;
 
 public class CRUDTest {
     //Testing create and delete and update operations using read method
-    private Admin admin;
+    private AdminCRUD admin;
     private MediaContentUploadable item;
     private Uploader uploader;
     private ArrayList<MediaContentUploadable> MediaFileList;
@@ -27,9 +24,9 @@ public class CRUDTest {
     void setUp() {
         uploader = new UploaderImpl("Producer1");
         String itemToCreateAsText = "AudioVideo Nagi News 1024 800 5000 1080x720";
-        item = getMockAudioVideo();
+        item = Parser.parse(itemToCreateAsText);
         MediaFileList = new ArrayList<>();
-        admin = new Admin(MediaFileList);
+        admin = new AdminCRUD(MediaFileList);
 
     }
     @Test void createTest(){
@@ -54,12 +51,11 @@ public class CRUDTest {
         ArrayList<MediaContentUploadable> result = admin.readUploader();
         assertEquals(1, result.size());
     }
-    private AudioVideo getMockAudioVideo() {
+    public  AudioVideo getMockAudioVideo() {
         String itemToCreateAsText = "AudioVideo Nagi News 1024 800 5000 1080x720";
         AudioVideo audioVideo = Mockito.mock(AudioVideo.class);
         when(audioVideo.getAddress()).thenReturn("InteractiveVideo@" + System.currentTimeMillis());
         when(audioVideo.getUploadDate()).thenReturn(new Date());
         return audioVideo;
     }
-
 }

@@ -1,6 +1,6 @@
 package sim;
 
-import gl.Admin;
+import gl.AdminCRUD;
 import mediaDB.AudioVideo;
 import mediaDB.AudioVideoImpl;
 
@@ -10,7 +10,7 @@ import java.util.Random;
 public class ThreadRemover<T> extends Thread {
     String name;
     ArrayList<T> MediaFileList;
-    Admin admin = new Admin(MediaFileList);
+    AdminCRUD admin = new AdminCRUD(MediaFileList);
     AudioVideo item = new AudioVideoImpl("ThreadRemove");
     Random random = new Random();
     public ThreadRemover(String s, ArrayList<T> MediaFileList) {

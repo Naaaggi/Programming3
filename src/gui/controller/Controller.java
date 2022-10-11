@@ -1,6 +1,6 @@
 package gui.controller;
 
-import gl.Admin;
+import gl.AdminCRUD;
 import gl.io.ResourceManager;
 import gl.io.SaveData;
 import javafx.collections.FXCollections;
@@ -32,7 +32,7 @@ public class Controller implements Initializable {
     @FXML private TableColumn<MediaContentUploadable, Integer> sizeColumn;
     @FXML private TableColumn<MediaContentUploadable, Date> dateColumn;
     @FXML private TableColumn<MediaContentUploadable, Long> accessCountColumn;
-    Admin<MediaContentUploadable> admin = new Admin<MediaContentUploadable>(MediaFileList,UploaderList);
+    AdminCRUD<MediaContentUploadable> admin = new AdminCRUD<MediaContentUploadable>(MediaFileList,UploaderList);
 
 
 

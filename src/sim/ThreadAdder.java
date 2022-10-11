@@ -13,7 +13,7 @@ import java.util.Random;
 public class ThreadAdder<T> extends Thread {
     String name;
     ArrayList<T> MediaFileList;
-    Admin admin = new Admin(MediaFileList);
+    AdminCRUD admin = new AdminCRUD(MediaFileList);
     Random random = new Random();
     List<String> randomFiles = Arrays.asList("InteractiveVideo Produzent1 Lifestyle,News 5000 3600 " +
             "Abstimmung 1080", "LicensedAudioVideo Produzent1 , 8000 600 EdBangerRecords 44100 720",
