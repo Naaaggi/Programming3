@@ -12,5 +12,6 @@ public class SaveData implements Serializable {
     public ArrayList<String> list;
     public ArrayList<String> mediaList;
 
+
 }
 

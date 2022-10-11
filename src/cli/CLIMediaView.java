@@ -48,18 +48,13 @@ public class CLIMediaView implements MediaView {
     }
 
     @Override
-    public void displayUploader(String name, int uploadsCount) {
-        System.out.println(name + " has uploaded " + uploadsCount + " media.");
-    }
-
-    @Override
-    public void displayMedia(String[] types, String[] retrievalAddress, Date[] uploadDate, long[] accessCount) {
+    public void displayMedia(String[] types, String[] Address, Date[] uploadDate, int[] accessCount) {
         for (int i = 0; i < types.length; i++) {
             System.out.println("Type: " + types[i]);
-            System.out.println("Retrieval address: " + retrievalAddress[i]);
+            System.out.println("Address: " + Address[i]);
             System.out.println("Upload date: " + uploadDate[i]);
             System.out.println("Access count: " + accessCount[i]);
-            System.out.println();
+            System.out.println("===================================");
         }
     }
 }

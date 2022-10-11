@@ -88,5 +88,11 @@ public class MediaStorage implements Subject {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "MediaStorage{" +
+                "diskSizeInMB=" + diskSize +
+                ", availableMediaStorageInMB=" + availableMediaStorageInMB +
+                '}';
+    }
 }

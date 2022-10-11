@@ -3,17 +3,18 @@ package sim;
 import gl.AdminCRUD;
 import mediaDB.AudioVideo;
 import mediaDB.AudioVideoImpl;
+import mediaDB.MediaContentUploadable;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class ThreadRemover<T> extends Thread {
     String name;
-    ArrayList<T> MediaFileList;
+    ArrayList<MediaContentUploadable> MediaFileList = new ArrayList<MediaContentUploadable>();
     AdminCRUD admin = new AdminCRUD(MediaFileList);
     AudioVideo item = new AudioVideoImpl("ThreadRemove");
     Random random = new Random();
-    public ThreadRemover(String s, ArrayList<T> MediaFileList) {
+    public ThreadRemover(String s, ArrayList<MediaContentUploadable> MediaFileList) {
         this.name = s;
         this.MediaFileList = MediaFileList;
     }
@@ -21,8 +22,7 @@ public class ThreadRemover<T> extends Thread {
     public void run() {
         synchronized (MediaFileList) {
             System.out.println("Thread remover started " + name);
-            ArrayList<AudioVideo> result = admin.readMedia();
-
+            ArrayList<MediaContentUploadable> result = admin.readMedia();
                 try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {

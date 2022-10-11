@@ -33,10 +33,18 @@ public class AdminCRUD<T>{
     public ArrayList<MediaContent> readMedia(){
         return MediaFileList;
     }
-    public void deleteMedia(T item){
+    public void deleteMedia(MediaContent item){
         MediaFileList.remove(item);
     }
-    public void updateMedia(MediaContentUploadable item, int accessCount){
+    public void updateMedia(MediaContent item, int accessCount){
        item.setAccessCount(accessCount+1);
+    }
+    public MediaContent getMediaByAddress(String address){
+        for (MediaContent mediaContent : MediaFileList) {
+            if (mediaContent.getAddress().equals(address)) {
+                return mediaContent;
+            }
+        }
+        return null;
     }
 }

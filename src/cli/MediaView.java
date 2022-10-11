@@ -11,6 +11,5 @@ public interface MediaView {
     void displayMessage(String message);
     void readInput(String title);
     void setHandler(InputEventHandler handler);
-    void displayUploader(String name, int uploadsCount);
-    void displayMedia(String[] types, String[] retrievalAddress, Date[] uploadDate, long[] accessCount);
+    void displayMedia(String[] types, String[] retrievalAddress, Date[] uploadDate, int[] accessCount);
 }

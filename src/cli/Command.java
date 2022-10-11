@@ -2,7 +2,7 @@ package cli;
 
 public enum Command {
     CREATE(":c", "Change to insert mode"),
-    VIEW(":r", "Change to view mode"),
+    READ(":r", "Change to view mode"),
     DELETE(":d","Change to delete mode" ),
     UPDATE(":u", "Change to update mode"),
     PERSISTENCE(":p","Change to persistence mode");

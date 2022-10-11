@@ -3,6 +3,7 @@ package alternative_cli.commands.Impl;
 import alternative_cli.commands.ICommand;
 import alternative_cli.console.IConsole;
 import gl.AdminCRUD;
+import mediaDB.MediaContent;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class deleteMediaCmd<T> implements ICommand {
     @Override
     public void execute() {
         String audioVideo = console.readString("Please pick audioVideo File to be deleted: ");
-        admin.deleteMedia((T) audioVideo);
+        //dmin.deleteMedia((T) audioVideo);
         System.out.println("The File " + audioVideo + " got deleted from the list.");
         ArrayList<T> result= admin.readMedia();
         System.out.println("The list contains currently the following files:\n" + result);

@@ -161,8 +161,8 @@ public class Controller implements Initializable {
         data1.list = new ArrayList<String>(UploaderList.getItems());
 
         try {
-            ResourceManager.save(data, "MediaFileList.txt");
-            ResourceManager.save(data1, "UploadFileList.txt");
+            ResourceManager.saveJOS(data, "MediaFileList.txt");
+            ResourceManager.saveJOS(data1, "UploadFileList.txt");
 
 
         }
@@ -175,7 +175,7 @@ public class Controller implements Initializable {
     void loadData(MouseEvent event) {
         try {
             // Load media list
-            SaveData data = (SaveData) ResourceManager.load("MediaFileList.txt");
+            SaveData data = (SaveData) ResourceManager.loadJOS("MediaFileList.txt");
             System.out.println(data.mediaList);
             MediaFileList.getItems().clear();
             ObservableList<MediaContentUploadable> items = FXCollections.observableArrayList();
@@ -187,7 +187,7 @@ public class Controller implements Initializable {
             }
 
             // Load uploader list
-            SaveData data1 = (SaveData) ResourceManager.load("UploadFileList.txt");
+            SaveData data1 = (SaveData) ResourceManager.loadJOS("UploadFileList.txt");
             System.out.println(data1.list);
             ObservableList<String> readUploadList = FXCollections.observableArrayList(data1.list);
             UploaderList.setItems(readUploadList);
