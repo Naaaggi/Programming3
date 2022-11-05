@@ -3,7 +3,7 @@ Created by:
 **Neji Ghazouani** *(579181)*
 ### Overall: 
 ```js
-Got 41/92 [Failed] 🥲 (Mainly because I didnt write tests..) you can find my 2nd try here:[a link](https://github.com/Naaaggi/Programmierung3---Cake-Machine)
+Got 41/92 [Failed] 🥲 (Mainly because I didnt write tests..) you can find my 2nd try here: https://github.com/Naaaggi/Programmierung3---Cake-Machine
 ```
 ## Tasks done:
 ### Exercise1:
